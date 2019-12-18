@@ -44,7 +44,7 @@ STDOUT_FIELDS = COLUMNS
 
 # http://python-3-patterns-idioms-test.readthedocs.org/en/latest/Factory.html
 # https://gist.github.com/pazdera/1099559
-logging.getLogger("requests").setLevel(logging.WARNING)
+logging.getLogger("requests").setLevel(logging.DEBUG)
 
 if os.getenv('CSIRTG_SMRT_HTTP_TRACE', '0') == '0':
     logging.getLogger("requests.packages.urllib3.connectionpool").setLevel(logging.WARNING)
@@ -84,7 +84,7 @@ class Smrt(object):
         self.no_fetch = no_fetch
         self.goback = goback
         self.skip_invalid = skip_invalid
-        self.verify_ssl = verify_ssl
+        self.verify_ssl = verify_sslÍ
         self.last_cache = None
         self.send_retries = send_retries
         self.send_retries_wait = send_retries_wait
@@ -260,7 +260,7 @@ class Smrt(object):
 
         for i in indicators:
             self._send_indicators(i)
-    
+
     def process(self, rule, feed, limit=None, data=None, filters=None):
         parser = self.load_parser(rule, feed, limit=limit, data=data, filters=filters)
 
@@ -278,7 +278,7 @@ class Smrt(object):
         # check to see if the indicator is too old
         if self.goback:
             feed_indicators = (i for i in feed_indicators if not self.is_old(i))
-        
+
         feed_indicators = (i for i in feed_indicators if not self.is_archived_with_log(i))
 
         feed_indicators_batches = chunk(feed_indicators, int(FIREBALL_SIZE))
@@ -364,7 +364,7 @@ def main():
 
         example usage:
             $ csirtg-smrt --rule rules/default
-            $ csirtg-smrt --rule default/csirtg.yml --feed port-scanners --remote http://localhost:5000
+            $ csirtg-smrt --rule default/csirtg.yml --feed port-scanners --remote http://localhost:5000 # what is remote means here?
         '''),
         formatter_class=RawDescriptionHelpFormatter,
         prog='csirtg-smrt',
