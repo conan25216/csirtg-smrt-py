@@ -14,9 +14,10 @@ from sqlalchemy.sql.expression import func
 from pprint import pprint
 
 TRACE = os.environ.get('CSIRTG_SMRT_SQLITE_TRACE')
-CLEANUP_DAYS = os.getenv('CSIRTG_SMRT_ARCHIVER_CLEANUP_DAYS', 60)
+CLEANUP_DAYS = os.getenv('CSIRTG_SMRT_ARCHIVER_CLEANUP_DAYS', 30)
 
 DB_FILE = os.path.join(CACHE_PATH, 'smrt.db')
+print(DB_FILE)
 Base = declarative_base()
 
 if PYVERSION > 2:
@@ -140,7 +141,7 @@ class Archiver(object):
             return False
 
         (ex_group, ex_tags, ex_ft, ex_lt) = self.memcache[indicator.indicator]
-        
+
         # Is the indicator or tags different?
         if (ex_group, ex_tags) != (indicator.group, tags):
             return False
