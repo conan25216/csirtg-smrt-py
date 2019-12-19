@@ -35,6 +35,8 @@ if sys.version_info > (3,):
     PYVERSION = 3
 
 
+LOG_FILE = os.path.join(RUNTIME_PATH,"csirtg_smrt.log")
+
 FIREBALL_SIZE = os.getenv('CSIRTG_SMRT_FIREBALL_SIZE', 100)
 if FIREBALL_SIZE == '':
     FIREBALL_SIZE = 100

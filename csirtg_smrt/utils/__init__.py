@@ -65,6 +65,11 @@ def setup_logging(args):
     console.setFormatter(logging.Formatter(LOG_FORMAT))
     logging.getLogger('').addHandler(console)
 
+    # conan add, file log
+    fh = RotatingFileHandler(LOG_FILE, 1024 * 1024 * 4, 1)
+    fh.setFormatter(logging.Formatter(LOG_FORMAT))
+    logging.getLogger('').addHandler(fh)
+
 
 def setup_signals(name):
     logger = logging.getLogger(__name__)

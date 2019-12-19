@@ -14,7 +14,7 @@ from sqlalchemy.sql.expression import func
 from pprint import pprint
 
 TRACE = os.environ.get('CSIRTG_SMRT_SQLITE_TRACE')
-CLEANUP_DAYS = os.getenv('CSIRTG_SMRT_ARCHIVER_CLEANUP_DAYS', 30)
+CLEANUP_DAYS = os.getenv('CSIRTG_SMRT_ARCHIVER_CLEANUP_DAYS', 30) # 60 -> 30
 
 DB_FILE = os.path.join(CACHE_PATH, 'smrt.db')
 print(DB_FILE)
