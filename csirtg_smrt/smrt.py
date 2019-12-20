@@ -50,7 +50,7 @@ if os.getenv('CSIRTG_SMRT_HTTP_TRACE', '0') == '0':
     logging.getLogger("requests.packages.urllib3.connectionpool").setLevel(logging.WARNING)
 
 logger = logging.getLogger(__name__)
-
+logger.setLevel(logging.DEBUG)
 
 class Smrt(object):
     def __exit__(self, exc_type, exc_val, exc_tb):
@@ -299,7 +299,6 @@ class Smrt(object):
         if limit:
             self.logger.debug("limit reached...")
 
-
 def _run_smrt(options, **kwargs):
     args = kwargs.get('args')
     goback = kwargs.get('goback')
@@ -392,6 +391,7 @@ def main():
                    default=SERVICE_INTERVAL)
     p.add_argument('--ignore-unknown', action='store_true')
 
+    # token
     p.add_argument('--config', help='specify csirtg-smrt config path [default %(default)s', default=CONFIG_PATH)
 
     p.add_argument('--user')
@@ -466,7 +466,7 @@ def main():
     setup_signals(__name__)
     service_interval = int(args.service_interval)
     r = int(args.delay)
-    logger.info("random delay is {}, then running every {} min after that".format(r, service_interval))
+    logger.info("random delay is {}, then running every {} min after that".format(r, serviœce_interval))
 
     if r != 0:
         try:
